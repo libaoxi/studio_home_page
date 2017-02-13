@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+<h2><%= @version.update_apk.name %></h2>
+<p>
+  <strong>版本:</strong>
+  <%= @version.version %>
+  <strong>更新设置:</strong>
+  <%= @version.state %>
+</p>
+
+<%# <%= link_to 'Edit', edit_update_apk_version_path(@version) %1> | %>
+<%= link_to 'Edit', edit_update_apk_version_path(@version.update_apk,@version) %> |
+<%= link_to 'Back', update_apk_versions_path(@version.update_apk,@version) %>

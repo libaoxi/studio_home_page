@@ -1,0 +1,28 @@
+<h1>Listing update_apks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>AppKey</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @update_apks.each do |update_apk| %>
+      <tr>
+        <td><%= update_apk.name %></td>
+        <td><%= update_apk.uuid %></td>
+        <td><%= link_to 'Show', update_apk %></td>
+        <td><%= link_to 'Edit', edit_update_apk_path(update_apk) %></td>
+        <td><%= link_to 'Destroy', update_apk, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show Version', update_apk_versions_path(update_apk) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Update apk', new_update_apk_path %>

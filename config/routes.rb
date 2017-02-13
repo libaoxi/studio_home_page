@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get '/app/check_update' => 'update_apks#check_update'
+  resources :update_apks do
+      resources :versions
+  end
+  resources :versions
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

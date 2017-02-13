@@ -1,0 +1,28 @@
+<h1>Listing versions</h1>
+<h2><%= @update_apk.name %></h2>
+<table>
+  <thead>
+    <tr>
+      <th>版本</th>
+      <th>更新设置</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @versions.each do |version| %>
+      <tr>
+        <td><%= version.version %></td>
+        <td><%= version.state %></td>
+        <td><%= link_to 'Show', version %></td>
+        <td><%= link_to 'Edit', edit_update_apk_version_path(@update_apk,version) %></td>
+        <td><%= link_to 'Destroy', update_apk_version_path(@update_apk,version), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新建', new_update_apk_version_path(@update_apk) %>
+<%= link_to 'Back', update_apks_path %>

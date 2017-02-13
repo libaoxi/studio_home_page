@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @update_apk.name %>
+</p>
+
+<p>
+  <strong>AppKey:</strong>
+  <%= @update_apk.uuid %>
+</p>
+
+<%= link_to 'Edit', edit_update_apk_path(@update_apk) %> |
+<%= link_to 'Back', update_apks_path %>

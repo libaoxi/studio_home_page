@@ -1,0 +1,29 @@
+<h1>New update_apk</h1>
+
+<%= form_for(@update_apk) do |f| %>
+    <% if @update_apk.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@update_apk.errors.count, "error") %> prohibited this update_apk from being saved:</h2>
+
+            <ul>
+                <% @update_apk.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= f.label :App名称 %><br>
+        <%= f.text_field :name ,size:'50px' %>
+    </div>
+    <div class="field">
+        <%= f.label :AppKey %><br>
+        <%= f.text_field :uuid,readonly:'readonly',size:'50px' %>
+    </div>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>
+
+<%= link_to 'Back', update_apks_path %>
