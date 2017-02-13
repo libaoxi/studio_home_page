@@ -85,7 +85,7 @@ class VersionsController < ApplicationController
         if Rails.env == 'development'
             file = '/Users/baoxi/Workspace/temp/'+params['version']['file'].original_filename
         elsif Rails.env == 'production'
-            file = '/vagrant/static'+params['version']['file'].original_filename
+            file = '/vagrant/static/apk/'+params['version']['file'].original_filename
         end
         if File.exist?(file)
             File.delete(file)
