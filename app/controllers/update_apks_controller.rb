@@ -1,5 +1,6 @@
 class UpdateApksController < ApplicationController
     before_action :set_update_apk, only: [:show, :edit, :update, :destroy]
+    protect_from_forgery except: :check_update
     # GET /update_apks
     # GET /update_apks.json
     def index
