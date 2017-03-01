@@ -1,41 +1,54 @@
 class UpdateApk < ActiveRecord::Base
     has_many :versions
-    def self.compare(uuid,version)
+    def compare(uuid,version)
         puts uuid
         result = {}
-        vs = self.find_by_uuid(uuid)
+        vs = self.class.find_by_uuid(uuid)
         if vs.nil?
             result[:errorInfo] = "找不到这个AppKey。"
             result[:errorCode] = -1 
             return result
         end
-        vs = vs.versions.where('version >= ?',version)
+        vs = vs.versions
         if vs.size == 0
             result[:errorInfo] = "未找到任何版本。"
             result[:errorCode] = -1
             return result
         end
-        ft = [0,nil,nil]
+        ft = ["0.0.0",nil,'不强制更新']
         vs.each do |l|
-            if l.version > ft[0]
+            if diff(l.version,ft[0]) == 1
                 ft[0] = l.version
                 ft[1] = l.filename
-                ft[2] = l.state
+                ft[2] = l.state if l.state == '强制更新'
             end
         end
-        if ft[0] < version
+        case diff(ft[0],version)
+        when -1
             result[:errorInfo] = '用户版本高于数据库版本.'
             result[:errorCode] = -1
-        elsif ft[0] == version
+        when 0
             result[:errorInfo] = '用户版本是最新版本.'
             result[:errorCode] = 1000
             result[:isUpdate] = 'no'
-        elsif ft[0] > version
+        when 1
             result[:errorInfo] = '用户版本不是最新版本'
             result[:errorCode] = 1000
             ft[2] == '强制更新' ? result[:isUpdate] = 'must' : result[:isUpdate] = 'yes'
         end
         result[:downloadUrl] = 'http://60.10.135.153:5000/apk/'+ft[1]
         result
+    end
+
+    private
+    def diff(v1,v2)
+        v1 = v1.split('.')
+        v2 = v2.split('.')
+        (0..2).each do |n|
+            v = (v1[n] <=> v2[n])
+            return v if v == 1
+            return v if v == -1 
+        end
+        return 0
     end
 end

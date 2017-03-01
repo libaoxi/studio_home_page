@@ -14,7 +14,8 @@
   <%= f.hidden_field :update_apk_id, value:@update_apk.id %>
   <div class="field">
     <%= f.label :版本 %><br>
-    <%= f.number_field :version,step:'0.1' %>
+    <%= f.text_field :version,onkeypress:"return (/[/\d/./].test(String.fromCharCode(event.keyCode)))",onkeyup:"inputWarning(this)",style:"ime-mode:Disabled"%>
+    <label id='inputWarning'></label>
   </div>
   <div class="field">
     <%= f.label :更新设置 %><br>
@@ -28,3 +29,14 @@
     <%= f.submit %>
   </div>
 <% end %>
+<script>
+    function inputWarning(ob){
+        if(!ob.value.match(/^\d+.\d+.\d+$/)){
+            $("#inputWarning").html("请注意格式:1.2.34");
+            $('.actions>input').attr('disabled','disabled');
+        }else{
+            $("#inputWarning").html("");
+            $('.actions>input').removeAttr('disabled');
+        }
+    }
+</script>

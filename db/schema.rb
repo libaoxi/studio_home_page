@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213090033) do
+ActiveRecord::Schema.define(version: 20170301040620) do
 
   create_table "update_apks", force: true do |t|
     t.string   "name"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20170213090033) do
   create_table "versions", force: true do |t|
     t.date     "update_apk_id"
     t.string   "state"
-    t.float    "version"
+    t.string   "version"
     t.string   "filename"
     t.datetime "created_at"
     t.datetime "updated_at"

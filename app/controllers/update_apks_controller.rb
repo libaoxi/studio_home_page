@@ -23,7 +23,7 @@ class UpdateApksController < ApplicationController
     #比较版本
     def check_update
         respond_to do |format|
-            format.json{render json: UpdateApk.compare(params[:appKey],params[:version].to_f) }
+            format.json{render json: UpdateApk.new.compare(params[:appKey],params[:version]) }
         end
     end
 
