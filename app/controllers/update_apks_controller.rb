@@ -69,6 +69,14 @@ class UpdateApksController < ApplicationController
         end
     end
 
+    def latest
+        if !params[:appKey]
+            render :file=>'/public/404.html',:status=>404
+        else
+            redirect_to UpdateApk.new.latest(params[:appKey])
+        end
+    end
+
     private
     # Use callbacks to share common setup or constraints between actions.
     def set_update_apk

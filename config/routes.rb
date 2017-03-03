@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/app/check_update' => 'update_apks#check_update'
+  get '/app/latest' => 'update_apks#latest'
   resources :update_apks do
       resources :versions
   end

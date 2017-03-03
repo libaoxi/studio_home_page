@@ -1,7 +1,7 @@
 class UpdateApk < ActiveRecord::Base
     has_many :versions
+    DURL = 'http://60.10.135.153:5000/apk/'
     def compare(uuid,version)
-        puts uuid
         result = {}
         vs = self.class.find_by_uuid(uuid)
         if vs.nil?
@@ -36,8 +36,17 @@ class UpdateApk < ActiveRecord::Base
             result[:errorCode] = 1000
             ft[2] == '强制更新' ? result[:isUpdate] = 'must' : result[:isUpdate] = 'yes'
         end
-        result[:downloadUrl] = 'http://60.10.135.153:5000/apk/'+ft[1]
+        result[:downloadUrl] = DURL+ft[1]
         result
+    end
+
+    #获取最新版本app，异常返回真财网
+    def latest(uuid)
+        begin
+            filename = DURL+self.class.find_by_uuid(uuid).versions.order(updated_at: :desc).first.filename
+        rescue
+            filename = 'http://www.zc12369.com'
+        end
     end
 
     private
