@@ -1,0 +1,10 @@
+<h1>Editing user</h1>
+
+<%= render 'form' %>
+
+<% if User.find(session[:user_id]).is_admin %>
+    <%= link_to 'Show', @user %> |
+    <%= link_to 'Back', users_path %>
+<% else %>
+    <%= link_to 'Back', '/update_apks' %>
+<% end %>

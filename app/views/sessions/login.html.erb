@@ -1,0 +1,8 @@
+<h1>欢迎UNICORN工作室后台管理系统</h1>
+<%= form_tag("/sign_in",method:'post') do %>
+    <%= label_tag(:name,"用户名:") %>
+    <%= text_field_tag(:name) %>
+    <%= label_tag(:password,"密码:") %>
+    <%= password_field_tag(:password) %>
+    <%= submit_tag("确定")%>
+<% end %>

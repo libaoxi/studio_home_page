@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :users
+  get '/login'=>'sessions#login'
+  post '/sign_in'=>'sessions#sign_in'
+  get '/sign_out'=>'sessions#sign_out'
   post '/app/check_update' => 'update_apks#check_update'
   get '/app/latest' => 'update_apks#latest'
   resources :update_apks do

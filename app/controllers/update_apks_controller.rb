@@ -1,9 +1,11 @@
-class UpdateApksController < ApplicationController
+class UpdateApksController < SessionsController
+    before_action :is_login, except: :latest
     before_action :set_update_apk, only: [:show, :edit, :update, :destroy]
     protect_from_forgery except: :check_update
     # GET /update_apks
     # GET /update_apks.json
     def index
+        puts session[:user_id]
         @update_apks = UpdateApk.all
     end
 
@@ -23,7 +25,6 @@ class UpdateApksController < ApplicationController
 
     #比较版本
     def check_update
-        puts params
         respond_to do |format|
             format.json{render json: UpdateApk.new.compare(params[:appKey],params[:version]) }
         end

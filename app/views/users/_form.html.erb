@@ -1,0 +1,39 @@
+<%= form_for(@user) do |f| %>
+    <% if @user.errors.any? %>
+        <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+            <ul>
+                <% @user.errors.full_messages.each do |message| %>
+                    <li><%= message %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+        <%= f.label :用户名 %><br>
+        <% if @user.is_admin %>
+            <%= f.text_field :name %>
+        <% else %>
+            <%= @user.name %>
+        <% end %>
+    </div>
+    <div class="field">
+        <%= f.label :密码 %><br>
+        <%= f.text_field :password %>
+    </div>
+    <div class="field">
+        <%= f.label :确认密码 %><br>
+        <%= f.text_field :password_confirmation %>
+    </div>
+    <% if @user.is_admin %>
+        <div class="field">
+            <%= f.label :管理员 %><br>
+            <%= f.check_box :is_admin %>
+        </div>
+    <% end %>
+    <div class="actions">
+        <%= f.submit %>
+    </div>
+<% end %>

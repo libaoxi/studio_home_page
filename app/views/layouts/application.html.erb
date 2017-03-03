@@ -7,7 +7,19 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+    <% if flash[:notice] %>
+        <%= flash[:notice] %>
+        <br>
+    <% end %>
+    <% if session[:user_id] %>
+        <% user = User.find(session[:user_id]) %>
+        <%= user.name %>
+        <a href='/users/<%= session[:user_id] %>/edit'>修改密码</a>
+        <a href="/sign_out">退出登陆</a>
+        <% if user.is_admin %>
+            <a href='/users'>管理用户</a>
+        <% end %>
+    <% end %>
 <%= yield %>
 
 </body>

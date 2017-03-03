@@ -11,13 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301040620) do
+ActiveRecord::Schema.define(version: 20170303102738) do
 
   create_table "update_apks", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uuid"
+  end
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "password_digest"
+    t.string   "remeber_digest"
+    t.boolean  "is_admin",        limit: 255, default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "versions", force: true do |t|
